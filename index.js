@@ -37,9 +37,9 @@ bot.onText(/\/start/, (msg) => {
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-    // const userName = msg.chat.username;
-    // const lastName = msg.chat.last_name;
-    // const firstName = msg.chat.first_name;
+    const userName = msg.chat.username;
+    const lastName = msg.chat.last_name;
+    const firstName = msg.chat.first_name;
 
     if (!welcomeMessagesSent.get(chatId)) {
         return;
@@ -71,7 +71,7 @@ bot.on('message', async (msg) => {
         } catch (error) {
             bot.sendMessage(chatId, "City doesn't exist.");
         }
-        // console.log({ "User Name": userName, "Full Name": firstName + " " + lastName, "User Input": userInput });
+        console.log({ "User Name": userName, "Full Name": firstName + " " + lastName, "User Input": userInput });
     } else {
         const answer = msg.text.trim().toLowerCase();
 
