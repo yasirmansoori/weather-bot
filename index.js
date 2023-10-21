@@ -15,8 +15,7 @@ const app = express();
 app.get('/', (req, res) => {
     res.send('Working fine')
 })
-// const port = 3000;
-
+// Bot creation setup
 const bot = new TelegramBot(token, { polling: true });
 const welcomeMessagesSent = new Map();
 const waitingForCityInput = new Map();
@@ -90,5 +89,5 @@ bot.on('message', async (msg) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on https://telegram-weather-bot-v4dt.onrender.com:${port}`);
 });
