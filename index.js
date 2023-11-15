@@ -5,18 +5,18 @@ const emoji = require('node-emoji');
 const robot = emoji.get('robot');
 const fire = emoji.get('fire');
 const wavinghand = emoji.get('wave');
-const token = process.env.TOKEN;
-const port = process.env.PORT || 3030;
-
+const { TOKEN, PORT, API_KEY } = process.env;
 
 // express server setup
 const express = require('express');
 const app = express();
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
     res.send('Working fine')
 })
 // Bot creation setup
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(TOKEN, { polling: true });
 const welcomeMessagesSent = new Map();
 const waitingForCityInput = new Map();
 
@@ -53,7 +53,7 @@ bot.on('message', async (msg) => {
 
         try {
             const response = await axios.get(
-                `https://api.openweathermap.org/data/2.5/weather?q=${userInput},IN&appid=${process.env.API_KEY}`
+                `https://api.openweathermap.org/data/2.5/weather?q=${userInput},IN&appid=${API_KEY}`
             );
             const data = response.data;
             const weather = data.weather[0].description;
@@ -82,12 +82,10 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId, "I'm shutting down " + robot + ", to " + fire + " me again, type /start, till then have a nice day!" + wavinghand);
             waitingForCityInput.delete(chatId);
         }
-        // else {
-        //     bot.sendMessage(chatId, "Please enter either 'Yes' or 'No'.");
-        // }
+
     }
 });
 
-app.listen(port, () => {
-    console.log(`Server is running on https://telegram-weather-bot-v4dt.onrender.com:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);//for development environment
 });

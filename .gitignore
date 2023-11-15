@@ -2,5 +2,5 @@ node_modules
 .env
 emoji-en-US.json
 passport.js
-admin.html
 package-lock.json
+.vscode
