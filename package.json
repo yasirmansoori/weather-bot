@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "pm2 start index.js --name telegram-chat-bot"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
